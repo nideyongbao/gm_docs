@@ -39,6 +39,43 @@
 | 11 | `11_strategy_pairs_trading.py` | 配对交易 | 基础配对、动态对冲、多配对轮动 | ⭐⭐⭐⭐ |
 | 12 | `12_strategy_grid_trading.py` | 网格交易 | 等差网格、等比网格、动态网格、智能网格 | ⭐⭐⭐⭐ |
 
+### 风险管理模块 (13-15) 🆕
+
+| 序号 | 文件 | 内容 | 难度 |
+|------|------|------|------|
+| 13 | `13_risk_management.py` | 仓位管理 (固定比例、Kelly公式、ATR仓位、波动率平价) | ⭐⭐⭐ |
+| 14 | `14_stop_loss.py` | 止损止盈 (固定止损、移动止损、ATR止损、时间止损、阶梯止盈) | ⭐⭐⭐ |
+| 15 | `15_risk_metrics.py` | 风险指标 (最大回撤、VaR、夏普比率、索提诺比率、Calmar比率) | ⭐⭐⭐ |
+
+### 回测分析工具 (16-17) 🆕
+
+| 序号 | 文件 | 内容 | 难度 |
+|------|------|------|------|
+| 16 | `16_backtest_analyzer.py` | 回测分析器 (绩效分析、资金曲线、月度统计、交易分析) | ⭐⭐⭐ |
+| 17 | `17_param_optimizer.py` | 参数优化器 (网格搜索、随机搜索、遗传算法、稳健性检验) | ⭐⭐⭐⭐ |
+
+### 交互式学习 (note目录) 🆕
+
+| 文件 | 内容 | 用途 |
+|------|------|------|
+| `01_data_exploration.ipynb` | 数据探索 | 数据获取、统计分析、收益率分析、相关性分析 |
+| `02_indicator_debug.ipynb` | 指标调试 | 技术指标可视化、参数调整、信号验证 |
+| `03_strategy_prototype.ipynb` | 策略原型 | 策略设计、简易回测、参数优化、策略改进 |
+
+### 多因子选股 (18-20) 🆕
+
+| 序号 | 文件 | 内容 | 难度 |
+|------|------|------|------|
+| 18 | `18_factor_library.py` | 因子库 (动量、价值、质量、波动率、技术、成长因子) | ⭐⭐⭐⭐ |
+| 19 | `19_factor_analysis.py` | 因子分析 (IC、IR、分层回测、因子衰减、Fama-MacBeth) | ⭐⭐⭐⭐ |
+| 20 | `20_portfolio_construction.py` | 组合构建 (因子合成、股票筛选、权重优化、风险平价) | ⭐⭐⭐⭐⭐ |
+
+### 实盘对接 (21) 🆕
+
+| 序号 | 文件 | 内容 | 难度 |
+|------|------|------|------|
+| 21 | `21_live_trading_guide.py` | 实盘指南 (检查清单、风控系统、监控告警、FAQ) | ⭐⭐⭐⭐ |
+
 ## 学习路径
 
 ```
@@ -67,6 +104,30 @@
 ├── 均值回归 - 适合震荡市场
 ├── 配对交易 - 市场中性策略
 └── 网格交易 - 波动收益策略
+
+第六阶段：风险管理（13-15）
+├── 仓位管理 - Kelly、ATR、波动率平价
+├── 止损止盈 - 固定、移动、ATR止损
+└── 风险指标 - 回撤、VaR、夏普比率
+
+第七阶段：回测分析（16-17）
+├── 绩效分析器 - 资金曲线、月度统计
+└── 参数优化 - 网格搜索、遗传算法
+
+第八阶段：交互式学习（Notebooks）
+├── 数据探索 - 可视化分析
+├── 指标调试 - 参数调整验证
+└── 策略原型 - 快速验证想法
+
+第九阶段：多因子选股（18-20）
+├── 因子库 - 动量、价值、质量、波动率
+├── 因子分析 - IC、IR、分层回测
+└── 组合构建 - 因子合成、权重优化
+
+第十阶段：实盘对接（21）
+├── 实盘检查清单 - 上线前必查
+├── 风控系统 - 仓位、止损、交易限制
+└── 监控告警 - 异常检测、日志记录
 ```
 
 ## 快速开始
@@ -289,6 +350,133 @@ from test.grid_trading import calculate_grid_params
 calculate_grid_params(10.0, -20, 30, 500000, 10, 'geometric')
 ```
 
+### 13-17 - 风险管理与分析工具
+
+```python
+# 仓位管理
+from test.risk_management import (
+    PositionSizer,
+    fixed_ratio_size,      # 固定比例仓位
+    kelly_size,            # Kelly公式
+    atr_position_size,     # ATR动态仓位
+    volatility_parity_size # 波动率平价
+)
+
+# 止损止盈
+from test.stop_loss import (
+    StopLossManager,
+    fixed_stop_loss,       # 固定止损
+    trailing_stop,         # 移动止损
+    atr_stop_loss,         # ATR止损
+    time_stop,             # 时间止损
+    step_take_profit       # 阶梯止盈
+)
+
+# 风险指标
+from test.risk_metrics import (
+    RiskAnalyzer,
+    calculate_max_drawdown,  # 最大回撤
+    calculate_var,           # VaR
+    calculate_sharpe,        # 夏普比率
+    calculate_sortino,       # 索提诺比率
+    calculate_calmar         # Calmar比率
+)
+
+# 回测分析
+from test.backtest_analyzer import (
+    BacktestAnalyzer,
+    generate_report,         # 生成绩效报告
+    plot_equity_curve,       # 资金曲线图
+    monthly_returns,         # 月度收益统计
+    trade_analysis           # 交易分析
+)
+
+# 参数优化
+from test.param_optimizer import (
+    GridSearchOptimizer,     # 网格搜索
+    RandomSearchOptimizer,   # 随机搜索
+    GeneticOptimizer,        # 遗传算法
+    walk_forward_analysis,   # 滚动优化
+    robustness_test          # 稳健性检验
+)
+```
+
+### 18-20 - 多因子选股
+
+```python
+# 因子库
+from factor_library import (
+    FactorCalculator,           # 因子计算器
+    standardize,                # 标准化
+    winsorize,                  # 缩尾处理
+    neutralize,                 # 中性化
+    preprocess_factors          # 因子预处理
+)
+
+# 因子分析
+from factor_analysis import (
+    FactorAnalyzer,             # 因子分析器
+    FactorReport,               # 分析报告生成
+)
+
+# 使用示例 - IC分析
+analyzer = FactorAnalyzer()
+ic_series = analyzer.calculate_ic_series(factor_df, returns_df)
+ic_stats = analyzer.calculate_ic_stats(ic_series)
+print(f"IC均值: {ic_stats['IC_Mean']:.4f}")
+print(f"IR: {ic_stats['IR']:.4f}")
+
+# 使用示例 - 分层回测
+layer_results = analyzer.layer_backtest(factor_df, returns_df, n_groups=5)
+print(layer_results['stats'])
+
+# 组合构建
+from portfolio_construction import (
+    FactorCombiner,             # 因子合成
+    StockSelector,              # 股票筛选
+    WeightOptimizer,            # 权重优化
+    PortfolioConstructor,       # 组合构建器
+)
+
+# 使用示例 - 构建组合
+constructor = PortfolioConstructor()
+weights = constructor.optimized_construct(
+    factor_df=factors,
+    returns_df=returns,
+    n_stocks=30,
+    weight_method='risk_parity'  # 风险平价
+)
+```
+
+### 21 - 实盘对接
+
+```python
+from live_trading_guide import (
+    RiskController,             # 风控系统
+    TradingMonitor,             # 交易监控
+    PreLiveChecker,             # 实盘前检查
+)
+
+# 运行实盘前检查
+checker = PreLiveChecker()
+checker.run_all_checks(
+    token='your_token',
+    strategy_file='strategy.py',
+    config=RISK_CONFIG
+)
+
+# 风控系统
+risk_ctrl = RiskController(RISK_CONFIG)
+if risk_ctrl.check_order(symbol, volume, price, side, total_capital):
+    order_volume(...)  # 下单
+risk_ctrl.record_trade(symbol, volume, price, side)
+
+# 监控告警
+monitor = TradingMonitor()
+monitor.report_trade(symbol, side, volume, price)
+monitor.report_large_loss(loss_pct)
+```
+
 ## 策略选择指南
 
 ```
@@ -301,6 +489,15 @@ calculate_grid_params(10.0, -20, 30, 500000, 10, 'geometric')
 ├── 小资金 (<10万) → 单策略单股票
 ├── 中等资金 (10-50万) → 网格或轮动策略
 └── 大资金 (>50万) → 配对交易或多策略组合
+
+完整开发流程:
+├── 1. Jupyter Notebook 验证想法 (note/)
+├── 2. 简易回测评估可行性
+├── 3. 编写正式策略代码 (test/)
+├── 4. 参数优化 (17_param_optimizer.py)
+├── 5. 稳健性检验 (walk_forward, robustness_test)
+├── 6. 多因子选股 (18-20) 组合优化
+└── 7. 实盘前检查 (21_live_trading_guide.py)
 ```
 
 ## 学习建议
