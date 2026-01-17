@@ -261,21 +261,21 @@ def on_backtest_finished(context, indicator):
     print("=" * 60)
 
     print("\n【收益指标】")
-    print(f"  累计收益率:   {indicator['pnl_ratio'] * 100:>10.2f}%")
-    print(f"  年化收益率:   {indicator['pnl_ratio_annual'] * 100:>10.2f}%")
+    print(f"  累计收益率:   {indicator.get('pnl_ratio', 0) * 100:>10.2f}%")
+    print(f"  年化收益率:   {indicator.get('pnl_ratio_annual', 0) * 100:>10.2f}%")
     print(f"  基准收益率:   {indicator.get('benchmark_pnl_ratio', 0) * 100:>10.2f}%")
 
     print("\n【风险指标】")
-    print(f"  最大回撤:     {indicator['max_drawdown'] * 100:>10.2f}%")
-    print(f"  夏普比率:     {indicator['sharp_ratio']:>10.2f}")
+    print(f"  最大回撤:     {indicator.get('max_drawdown', 0) * 100:>10.2f}%")
+    print(f"  夏普比率:     {indicator.get('sharp_ratio', indicator.get('sharpe_ratio', 0)):>10.2f}")
     print(f"  卡玛比率:     {indicator.get('calmar_ratio', 0):>10.2f}")
 
     print("\n【交易统计】")
-    print(f"  交易次数:     {indicator['trade_count']:>10}")
-    print(f"  盈利次数:     {indicator['win_count']:>10}")
-    print(f"  亏损次数:     {indicator['lose_count']:>10}")
-    print(f"  胜率:         {indicator['win_ratio'] * 100:>10.2f}%")
-    print(f"  盈亏比:       {indicator['profit_loss_ratio']:>10.2f}")
+    print(f"  交易次数:     {indicator.get('trade_count', indicator.get('trade_num', context.trade_count)):>10}")
+    print(f"  盈利次数:     {indicator.get('win_count', 0):>10}")
+    print(f"  亏损次数:     {indicator.get('lose_count', 0):>10}")
+    print(f"  胜率:         {indicator.get('win_ratio', 0) * 100:>10.2f}%")
+    print(f"  盈亏比:       {indicator.get('profit_loss_ratio', 0):>10.2f}")
 
     print("\n【资金统计】")
     print(f"  期末资产:     {indicator.get('nav', 0):>10.2f}")
@@ -295,7 +295,7 @@ if __name__ == "__main__":
         strategy_id="your_strategy_id",  # 替换为你的策略ID
         filename="07_complete_strategy.py",
         mode=MODE_BACKTEST,
-        token="your_token_here",  # 替换为你的token
+        token="9e6fd0023372ae5a40ccefff5628bb354f506102",  # 替换为你的token
         # 回测时间范围
         backtest_start_time="2022-01-01 09:00:00",
         backtest_end_time="2023-12-31 16:00:00",
